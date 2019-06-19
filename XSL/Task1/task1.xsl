@@ -1,58 +1,61 @@
+
 <?xml version="1.0" encoding="utf-8" ?>
-<xsl:stylesheet version = "1.0" 
-     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version ="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:template match="/"> 
-	<html>
-	<head>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-		<title>Курсовая работа</title>
-	</head>
-	<body>
-		<h1 align="center">
-          	<math xmlns="http://www.w3.org/1998/Math/MathML">
-                    <xsl:apply-templates/>
-            </math>
-     	</h1>
-	</body>
-	</html>
+<xsl:template match="/">
+  <html>
+    <head>
+      <script
+        src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
+      </script>
+    </head>
+    <body>
+      <math display="block">
+        <xsl:apply-templates />
+      </math>
+    </body>
+  </html>
 </xsl:template>
 
-<xsl:template match="строка"> 
-	 <mrow> <xsl:apply-templates/> </mrow>
+<xsl:template match="операнд">
+  <mi> <xsl:value-of select="." /> </mi>
 </xsl:template>
 
-<xsl:template match="операнд"> 
-	 <mi> <xsl:value-of select="."/> </mi>
+<xsl:template match="оператор">
+  <mo> <xsl:value-of select="." /> </mo>
 </xsl:template>
 
-<xsl:template match="оператор"> 
-	 <mo> <xsl:value-of select="."/> </mo>
+<xsl:template match="оператор">
+  <mo> <xsl:value-of select="." /> </mo>
 </xsl:template>
 
-<xsl:template match="корень"> 
-	 <msqrt> <xsl:apply-templates/> </msqrt>
+<xsl:template match="число">
+  <mn> <xsl:value-of select="." /> </mn>
 </xsl:template>
 
-<xsl:template match="дробь"> 
-	 <mfrac> <xsl:apply-templates/> </mfrac>
+<xsl:template match="строка">
+  <mrow> <xsl:apply-templates /> </mrow>
 </xsl:template>
 
-<xsl:template match="число"> 
-	 <mn> <xsl:value-of select="."/> </mn>
+<xsl:template match="дробь">
+  <mfrac> <xsl:apply-templates /> </mfrac>
 </xsl:template>
 
-<xsl:template match="низверх"> 
-	 <munderover> <xsl:apply-templates/> </munderover>
+<xsl:template match="корень">
+  <msqrt> <xsl:apply-templates /> </msqrt>
 </xsl:template>
 
-<xsl:template match="верх"> 
-	 <msup> <xsl:apply-templates/> </msup>
+<xsl:template match="низверх">
+  <munderover> <xsl:apply-templates /> </munderover>
 </xsl:template>
 
-<xsl:template match="низ"> 
-	 <msub> <xsl:apply-templates/> </msub>
+<xsl:template match="верх">
+  <msup> <xsl:apply-templates /> </msup>
 </xsl:template>
 
-</xsl:stylesheet> 
+<xsl:template match="низ">
+  <msub> <xsl:apply-templates /> </msub>
+</xsl:template>
+
+</xsl:stylesheet>
