@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Log in</title>
+	<script>
+		window.onload = function(){
+			var buton = document.getElementById('buton');
+			var inputs = document.getElementsByTagName('input');
+
+			buton.addEventListener('click', function(){
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/login');
+				var userData = {
+					username: inputs[0].value,
+					password: inputs[1].value
+				};
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.send(JSON.stringify(userData));
+				xhr.onload = function (){
+					alert(this.responseText);
+				};
+				xhr.onerror = function(){
+					alert('Server error');
+				}
+			});
+			var btns = document.getElementById('btns');
+			btns.onclick = function(e) {
+				if (!e.target.dataset.page) return false;
+				var target = e.target.dataset.page;
+				var xhr= new XMLHttpRequest();
+				xhr.open('GET', '/'+target);
+				xhr.send();
+				xhr.onload=function(){
+					window.location.href="/"+target
+				}
+
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="panel well" style="width: 350px; padding: 25px; text-align: center">
+		<h2 style="margin-bottom: 35px"> Log in </h2>
+		<form name="login">
+			<div class="form">
+				<label>Username</label> <input class="form-control" type="text" id="login"/>
+			</div>
+			<div class="form">
+				<label>Password</label> <input class="form-control" type="text" id="password"/>
+			</div>
+			<div class="form">
+				 <input type="button" value="Log in" id="buton"/>
+			</div>
+		</form>
+	</div>
+	<div class="panel btns">
+		<form>
+		<button data-page="user" id="btns">User Page</button>
+		<input type="button" value="Start game as Guest" onclick="window.location.href='../menu.html'">
+	</form>
+	</div>
+	
+</body>
+</html>
